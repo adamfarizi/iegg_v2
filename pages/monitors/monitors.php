@@ -148,11 +148,10 @@ $row = mysqli_fetch_assoc($query);
                 <table class="table align-items-center text-center mb-0">
                   <thead style="position: sticky; top: 0; background-Color:#ffffff;">
                     <tr>
-                      <th class="text-uppercase">Monitors Id</th>
+                      <th class="text-uppercase">Date</th>
+                      <th class="text-uppercase">Times</th>
                       <th class="text-uppercase">Temperature</th>
                       <th class="text-uppercase">Humidity</th>
-                      <th class="text-uppercase">Times</th>
-                      <th class="text-uppercase">Date</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -161,15 +160,14 @@ $row = mysqli_fetch_assoc($query);
                     while ($row = mysqli_fetch_array($result)) {
                       $resulttime = mysqli_query($koneksi, "SELECT DATE_FORMAT(WAKTU, '%H:%i:%s') AS time FROM monitor");
                       $rowtime = mysqli_fetch_array($resulttime);
-                      $resultdate = mysqli_query($koneksi, "SELECT DATE_FORMAT(WAKTU, '%Y-%m-%d') AS date FROM monitor");
+                      $resultdate = mysqli_query($koneksi, "SELECT DATE_FORMAT(WAKTU, '%d/%m/%Y') AS date FROM monitor");
                       $rowdate = mysqli_fetch_array($resultdate);
                     ?>
                       <tr>
-                        <td class="w-10"><?php echo $row['ID_MONITOR']; ?></td>
+                        <td><?php echo $rowdate['date']; ?></td>
+                        <td><?php echo $rowtime['time']; ?></td>
                         <td><?php echo $row['SUHU']; ?> °C</td>
                         <td><?php echo $row['KELEMBABAN']; ?> %</td>
-                        <td><?php echo $rowtime['time']; ?></td>
-                        <td><?php echo $rowdate['date']; ?></td>
                       </tr>
                     <?php } ?>
                   </tbody>

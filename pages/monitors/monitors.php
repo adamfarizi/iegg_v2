@@ -155,21 +155,22 @@ $row = mysqli_fetch_assoc($query);
                     </tr>
                   </thead>
                   <tbody>
-                    <?php
-                    $result = mysqli_query($koneksi, "SELECT * FROM monitor ORDER BY ID_MONITOR ASC");
-                    while ($row = mysqli_fetch_array($result)) {
-                      $resulttime = mysqli_query($koneksi, "SELECT DATE_FORMAT(WAKTU, '%H:%i:%s') AS time FROM monitor");
-                      $rowtime = mysqli_fetch_array($resulttime);
-                      $resultdate = mysqli_query($koneksi, "SELECT DATE_FORMAT(WAKTU, '%d/%m/%Y') AS date FROM monitor");
-                      $rowdate = mysqli_fetch_array($resultdate);
-                    ?>
-                      <tr>
-                        <td><?php echo $rowdate['date']; ?></td>
-                        <td><?php echo $rowtime['time']; ?></td>
-                        <td><?php echo $row['SUHU']; ?> °C</td>
-                        <td><?php echo $row['KELEMBABAN']; ?> %</td>
-                      </tr>
-                    <?php } ?>
+                  <?php
+                  $result = mysqli_query($koneksi, "SELECT DATE_FORMAT(WAKTU, '%Y-%m-%d') AS tanggal, DATE_FORMAT(WAKTU, '%H:%i:%s') AS waktu, SUHU, KELEMBABAN FROM monitor ORDER BY WAKTU DESC");
+
+                  while ($row = mysqli_fetch_array($result)) {
+                    $tanggal = $row['tanggal'];
+                    $waktu = $row['waktu'];
+                    $suhu = $row['SUHU'];
+                    $kelembaban = $row['KELEMBABAN'];
+                  ?>
+                    <tr>
+                      <td><?php echo $tanggal; ?></td>
+                      <td><?php echo $waktu; ?></td>
+                      <td><?php echo $suhu; ?> °C</td>
+                      <td><?php echo $kelembaban; ?> %</td>
+                    </tr>
+                  <?php } ?>
                   </tbody>
                 </table>
               </div>

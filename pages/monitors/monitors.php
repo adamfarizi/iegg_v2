@@ -214,7 +214,8 @@ $row = mysqli_fetch_assoc($query);
     $labelsuhu = array();
 
     while ($row = mysqli_fetch_assoc($query)) {
-      $suhuPerHari[] = $row['rata_suhu'];
+      $rataSuhu = number_format($row['rata_suhu'], 2);
+      $suhuPerHari[] = $rataSuhu;
       $labelsuhu[] = $row['tanggal'];
     }
     ?>
